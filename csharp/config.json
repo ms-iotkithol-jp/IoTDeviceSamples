@@ -1,0 +1,15 @@
+{
+    "simulator":{
+        "connection-string":"HostName=egohtaiwan20180320.azure-devices.net;DeviceId=simulator;SharedAccessKey=U+F90K9H4oxCt7GkMmPnpBUhgba7kHADsXtQ0RJzEuE=",
+        "room-temperature":25.0,
+        "telemetry-cycle-msec":1000,
+        "update-interval-msec":500
+    },
+    "thing":{
+        "face-top":1,
+        "max-accel-value":3.0,
+        "accelerometer-white-noise-rate":0.01,
+        "temperature-white-noise-rate":0.1,
+        "temperature-delta-coef":0.1
+    }
+}

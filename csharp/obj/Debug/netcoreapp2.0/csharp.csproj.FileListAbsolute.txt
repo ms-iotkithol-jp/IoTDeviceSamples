@@ -1,0 +1,11 @@
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.csprojResolveAssemblyReference.cache
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.csproj.CoreCompileInputs.cache
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.AssemblyInfoInputs.cache
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.AssemblyInfo.cs
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\bin\Debug\netcoreapp2.0\csharp.deps.json
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\bin\Debug\netcoreapp2.0\csharp.runtimeconfig.json
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\bin\Debug\netcoreapp2.0\csharp.runtimeconfig.dev.json
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\bin\Debug\netcoreapp2.0\csharp.dll
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\bin\Debug\netcoreapp2.0\csharp.pdb
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.dll
+C:\Users\hirosho\Documents\Github.ms-iotkithol-jp\IoTDeviceSamples\csharp\obj\Debug\netcoreapp2.0\csharp.pdb
