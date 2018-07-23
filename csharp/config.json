@@ -1,6 +1,6 @@
 {
     "simulator":{
-        "connection-string":"HostName=egohtaiwan20180320.azure-devices.net;DeviceId=simulator;SharedAccessKey=U+F90K9H4oxCt7GkMmPnpBUhgba7kHADsXtQ0RJzEuE=",
+        "connection-string":"<< IoT Hub Connection String for the Device >>",
         "room-temperature":25.0,
         "telemetry-cycle-msec":1000,
         "update-interval-msec":500
