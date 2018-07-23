@@ -19,3 +19,8 @@ After above command is executed, This application load configuration from ./conf
 You can change this interval via Device Twin Desired Property as...  
 {"telemetry-cycle-msec":500}  
 Default interval is 1000 msec. 
+
+Simulator send following message.
+```json
+{}
+```
