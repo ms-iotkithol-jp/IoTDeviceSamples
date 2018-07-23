@@ -133,8 +133,15 @@ namespace csharp
             else if (command.ToLower().StartsWith("send"))
             {
                 var msg = command.Substring(command.IndexOf(":") + 1);
-                await simulator.SendEvent(msg);
-                Console.WriteLine("Send done - '{0}'", msg);
+                try
+                {
+                    await simulator.SendEvent(msg);
+                    Console.WriteLine("Send done - '{0}'", msg);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error - {0}", ex.Message);
+                }
             }
             else if (command.ToLower().StartsWith("room"))
             {

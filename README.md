@@ -11,6 +11,14 @@ Application features
 - receive Device Twin Desired Properties update on the cloud side 
 - receive invocation request of Device Method from the cloud 
 
+Simulator sends following format message.
+```json
+{
+"accelerometerx":-0.0044034717671589327, "accelerometery":0.0040134866507786724, "accelerometerz":-0.99999961030203832, "temperature":24.969412063120853, 
+"time":"2018-07-23T10:56:58.1204821+09:00"
+}
+```
+
 The received texts of command, desired properties updated and device method invocation from the cloud are shown in console window. 
 
 In addition, you can do several action by console.  
@@ -46,3 +54,28 @@ You can specify following configuration parameters related this application exec
     - temperature-delta-coef 
         - when status of Thing changes from Putting to Shaking vice versa, "Thing"'s face temperature get closer target depend on this co efficiency parameter 
 
+These configuration parameters are described in config.json for each language folder. 
+```json
+{
+    "simulator":{
+        "connection-string":"<< Connection String for Device in Azure IoT Hub",
+        "room-temperature":25.0,
+        "telemetry-cycle-msec":1000,
+        "update-interval-msec":500
+    },
+    "thing":{
+        "face-top":1,
+        "max-accel-value":3.0,
+        "accelerometer-white-noise-rate":0.01,
+        "temperature-white-noise-rate":0.1,
+        "temperature-delta-coef":0.1
+    }
+}
+```
+
+## For contributors  
+C# application is as reference so that update implementation for other each language application soon when C# app's feature is updated. 
+Each application should satisfy following matters. 
+- Application should load config.json and run depend on parameters in the file.  
+- Application should provide features described above. 
+ 

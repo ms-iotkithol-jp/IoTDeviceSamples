@@ -94,12 +94,27 @@ public class Simulator
 
     public async Task SendEvent(string msg)
     {
-        var packet = new
+        string jsonContent = "";
+        if (msg.StartsWith("{") && msg.EndsWith("}"))
         {
-            time = DateTime.Now,
-            message = msg
-        };
-        await deviceClient.SendEventAsync(new Message(System.Text.Encoding.UTF8.GetBytes(Newtonsoft.Json.JsonConvert.SerializeObject(packet))));
+            dynamic msgJson = Newtonsoft.Json.JsonConvert.DeserializeObject(msg);
+            var packet = new
+            {
+                time = DateTime.Now,
+                message = msgJson
+            };
+            jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(packet);
+        }
+        else
+        {
+            var packet = new
+            {
+                time = DateTime.Now,
+                message = msg
+            };
+            jsonContent = Newtonsoft.Json.JsonConvert.SerializeObject(packet);
+        }
+        await deviceClient.SendEventAsync(new Message(System.Text.Encoding.UTF8.GetBytes(jsonContent)));
     }
     public async Task UpdateReportedProperties(string twinJson)
     {
