@@ -35,7 +35,7 @@ public class Simulator
         await deviceClient.SetMethodDefaultHandlerAsync(MethodInvoked, this);
         await deviceClient.OpenAsync();
         var twin = await deviceClient.GetTwinAsync();
-        if (twin.Properties.Desired.Contains("updateIntervalCommand"))
+        if (twin.Properties.Desired.Contains(updateIntervalCommand))
         {
             TelemetryCycleMSec = twin.Properties.Desired[updateIntervalCommand];
         }
@@ -79,7 +79,7 @@ public class Simulator
             DesiredPropertiesUpdated(deviceClient, new DesiredPropertiesUpdatedEventArgs() { DesiredProperties = desiredProperties });
         }
 
-        if (desiredProperties.Contains("updateIntervalCommand"))
+        if (desiredProperties.Contains(updateIntervalCommand))
         {
             lock (this)
             {
