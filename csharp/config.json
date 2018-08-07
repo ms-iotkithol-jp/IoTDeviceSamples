@@ -1,15 +1,17 @@
 {
-    "simulator":{
-        "connection-string":"<< IoT Hub Connection String for the Device >>",
-        "room-temperature":25.0,
-        "telemetry-cycle-msec":1000,
-        "update-interval-msec":500
+    "simulator": {
+        "connection-string": "<< IoT Hub Connection String for the Device >>",
+        "room-temperature": 25.0,
+        "room-humidity": 46.7,
+        "telemetry-cycle-msec": 1000,
+        "update-interval-msec": 500
     },
-    "thing":{
-        "face-top":1,
-        "max-accel-value":3.0,
-        "accelerometer-white-noise-rate":0.01,
-        "temperature-white-noise-rate":0.1,
-        "temperature-delta-coef":0.1
+    "thing": {
+        "face-top": 1,
+        "max-accel-value": 3.0,
+        "accelerometer-white-noise-rate": 0.01,
+        "temperature-white-noise-rate": 0.001,
+        "temperature-delta-coef": 0.02,
+        "humidity-delta-round": 5
     }
 }
