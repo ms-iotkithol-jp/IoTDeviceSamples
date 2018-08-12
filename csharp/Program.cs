@@ -67,7 +67,7 @@ namespace csharp {
 
             while (true) {
                 Console.WriteLine ("Please input command:");
-                Console.WriteLine ("SHAKE:temp|PUT:[1-6]|SEND:message|UPLOAD:file-path|REPORTED:json-message|ROOM:temperature|HUM:humidity|QUIT");
+                Console.WriteLine ("SHAKE:temp|PUT:[1-6]|SEND:message|UPLOAD:file-path|REPORTED:json-message|ROOM:temperature|HUM:humidity|PHOTO:intervalSec|QUIT");
                 string command = Console.ReadLine ();
                 if (command.ToLower ().StartsWith ("quit")) {
                     break;
@@ -125,8 +125,24 @@ namespace csharp {
                 var newHum = double.Parse (orderHum[1]);
                 simulator.Humidity (newHum);
                 Console.WriteLine ("Humidity updated by {0}", newHum);
+            } else if (command.ToLower ().StartsWith ("photo")) {
+                var orderPhoto = command.Split (":");
+                var intervalPhoto = int.Parse (orderPhoto[1]);
+                if (simulatorPhotoTakingTask != null) {
+                    if (intervalPhoto > 0) {
+                        simulator.ChangeTakingPhotoInterval (intervalPhoto * 1000);
+                    } else {
+                        simulator.EndTakePicture (simulatorPhotoTakingTask, photoCancellingTokenSource);
+                        simulatorPhotoTakingTask = null;
+                    }
+                } else {
+                    photoCancellingTokenSource = new System.Threading.CancellationTokenSource ();
+                    simulatorPhotoTakingTask = simulator.StartTakePicture (intervalPhoto * 1000, photoCancellingTokenSource);
+                }
             }
         }
+        private Task simulatorPhotoTakingTask;
+        private System.Threading.CancellationTokenSource photoCancellingTokenSource;
 
         private void OnMessageReceived (object sender, Simulator.MessageReceivedEventArgs e) {
             Console.WriteLine ("[IoT Hub] Message Received - ");

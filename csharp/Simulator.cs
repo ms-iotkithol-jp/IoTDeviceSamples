@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
@@ -49,7 +50,6 @@ public class Simulator {
             }
         }
     }
-
     public void Humidity (double hum) {
         lock (this) {
             RoomHumidity = hum;
@@ -113,6 +113,67 @@ public class Simulator {
         await deviceClient.UpdateReportedPropertiesAsync (reportedProps);
     }
 
+    private string photoFileName = "photo";
+    private string photoFileNamePrefix = "img";
+    private string photoFileNameExt = ".jpeg";
+    private int takePhotoIntervalMSec = 0;
+    public void ChangeTakingPhotoInterval (int intervalMSec) {
+        lock (this) {
+            takePhotoIntervalMSec = intervalMSec;
+        }
+    }
+    public Task StartTakePicture (int intervalMSec, CancellationTokenSource cancelTokenSource) {
+        if (string.IsNullOrEmpty (photoFileNamePrefix)) {
+            var css = ConnectionString.Split (";");
+            var devdef = css[1].Split ("=");
+            photoFileNamePrefix = devdef[1];
+        }
+        lock (this) {
+            takePhotoIntervalMSec = intervalMSec;
+        }
+        var tmpFileName = photoFileName + photoFileNameExt;
+        var photoTakingTask = Task.Factory.StartNew (async () => {
+            var capture = OpenCvSharp.VideoCapture.FromCamera (0);
+            using (var win = new OpenCvSharp.Window ())
+            using (var mat = new OpenCvSharp.Mat ()) {
+                while (true) {
+                    capture.Read (mat);
+                    win.ShowImage (mat);
+                    var now = DateTime.Now;
+                    if (File.Exists (tmpFileName)) {
+                        File.Delete (tmpFileName);
+                    }
+                    using (var fs = new FileStream (tmpFileName, FileMode.CreateNew)) {
+                        mat.WriteToStream (fs, photoFileNameExt, null);
+                    }
+                    var fileName = photoFileNamePrefix + now.ToString ("yyyyMMddHHmmss") + photoFileNameExt;
+                    await UploadFile (fileName, new FileInfo (tmpFileName).FullName);
+                    var interval = 0;
+                    lock (this) {
+                        interval = takePhotoIntervalMSec;
+                    }
+                    await Task.Delay (interval);
+                    if (cancelTokenSource.IsCancellationRequested) {
+                        break;
+                    }
+                }
+                throw new OperationCanceledException (cancelTokenSource.Token);
+            }
+        }, cancelTokenSource.Token);
+
+        return photoTakingTask;
+    }
+
+    public void EndTakePicture (Task photoTakingTask, CancellationTokenSource cancelTokenSource) {
+        if (photoTakingTask != null && !photoTakingTask.IsCanceled) {
+            try {
+                cancelTokenSource.Cancel ();
+                photoTakingTask.Wait ();
+            } catch (Exception ex) {
+                Console.WriteLine ("Photo Taking Stopped.");
+            }
+        }
+    }
     private async Task ReceiveMessages () {
         await Task.Factory.StartNew (async () => {
             while (true) {

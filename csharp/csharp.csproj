@@ -6,5 +6,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.17.0"/>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2"/>
+    <PackageReference Include="OpenCvSharp3-AnyCPU" Version="*"/>
   </ItemGroup>
 </Project>
