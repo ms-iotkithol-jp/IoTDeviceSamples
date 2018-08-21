@@ -57,3 +57,16 @@ you can input command from keyboard to invoke following features...
 - PHOTO:<i>intervalSec</i>
     - order to start taking picture by Webcam on PC and upload to IoT Hub at fixed time intervals
     - <i>intervalSec</i> part is the interval unit second you want.
+
+
+## APPENDXI 
+### Edit/build on Windows PC and publish assembly to Raspbian/Raspberry Pi 
+When you want to edit or build this project for Raspberry Pi, please execute following command in integrated terminal in VS Code on Windows. 
+```shell
+dotnet publish -r linux-arm
+```
+By this command, publish folder and necessary assemblies are created under the bin/netcoreapp2.0/linux-arm. Please copy this fileset to Raspberry PI remotery then you can run it. 
+```shell
+cd publish/netcoreapp2.0/linux-arm
+./csharp
+```
