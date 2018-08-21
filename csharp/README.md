@@ -24,7 +24,7 @@ You can input commands to this application on the console.
 The console shows following text .
 ```shell
 Please input command:
-SHAKE:temp|PUT:[1-6]|SEND:message|UPLOAD:file-path|REPORTED:json-message|ROOM:temp|QUIT
+SHAKE:temp|PUT:[1-6]|SEND:message|UPLOAD:file-path|REPORTED:json-message|ROOM:temp|HUM:humidity|PHOTO:intervalSec|QUIT
 ```
 
 you can input command from keyboard to invoke following features... 
@@ -51,4 +51,9 @@ you can input command from keyboard to invoke following features...
 - ROOM:<i>temp</i>
     - order to change room temperature
     - <i>temp</i> part is the value for room temperature you want
-
+- HUM:<i>humidity</i> 
+    - order to change humidity around thing
+    - <i>humidity</i> part is the value for humidity you want
+- PHOTO:<i>intervalSec</i>
+    - order to start taking picture by Webcam on PC and upload to IoT Hub at fixed time intervals
+    - <i>intervalSec</i> part is the interval unit second you want.
