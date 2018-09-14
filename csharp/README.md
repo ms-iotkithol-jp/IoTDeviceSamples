@@ -59,7 +59,7 @@ you can input command from keyboard to invoke following features...
     - <i>intervalSec</i> part is the interval unit second you want.
 
 
-## APPENDXI 
+## APPENDIX 
 ### Edit/build on Windows PC and publish assembly to Raspbian/Raspberry Pi 
 When you want to edit or build this project for Raspberry Pi, please execute following command in integrated terminal in VS Code on Windows. 
 ```shell
